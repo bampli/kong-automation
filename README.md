@@ -40,14 +40,14 @@ https://github.com/prometheus-community/helm-charts
 
 ### Create Cluster
 ```
-cd infra/kong-k8s/kind
+cd infra/kong-k8s/kong-k8s/kind
 ./kind.sh
 
 ```
 
 ### Kong
 ```
-cd infra/kong-k8s/kong
+cd infra/kong-k8s/kong-k8s/kong
 ./kong.sh
 
 ```
@@ -57,9 +57,9 @@ cd infra/kong-k8s/kong
 https://github.com/prometheus-operator/kube-prometheus
 
 ```
-./infra/misc/prometheus/prometheus.sh
+./infra/kong-k8s/misc/prometheus/prometheus.sh
 
-./infra/misc/keycloak/keycloak.sh
+./infra/kong-k8s/misc/keycloak/keycloak.sh
 
 export SERVICE_PORT=$(kubectl get --namespace iam -o jsonpath="{.spec.ports[0].port}" services keycloak)
 export SERVICE_IP=$(kubectl get svc --namespace iam keycloak -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
@@ -68,7 +68,45 @@ echo "http://${SERVICE_IP}:${SERVICE_PORT}/"
 
 ```
 
+### Apps
+
+```
+cd infra/kong-k8s/misc/apps
+kubectl create ns bets
+kubectl apply -f . --recursive -n bets
+
+```
+
 ## Logs
+
+```
+
+kubectl get pods --all-namespaces
+NAMESPACE            NAME                                                     READY   STATUS    RESTARTS      AGE
+bets                 bets-5d498bc946-dgrlj                                    1/1     Running   0             2m11s
+bets                 championships-6fcd58fdb-mzbxx                            1/1     Running   0             2m11s
+bets                 matches-59c5f6f95f-cgsm7                                 1/1     Running   0             2m11s
+bets                 players-7f4479ff94-27xbt                                 1/1     Running   0             2m11s
+iam                  keycloak-0                                               1/1     Running   0             17m
+iam                  keycloak-postgresql-0                                    1/1     Running   0             17m
+kong                 kong-1654889531-kong-549d959645-prz8s                    2/2     Running   2 (56m ago)   56m
+kube-system          coredns-6d4b75cb6d-6b7jv                                 1/1     Running   0             104m
+kube-system          coredns-6d4b75cb6d-6qxbk                                 1/1     Running   0             104m
+kube-system          etcd-kong-fc-control-plane                               1/1     Running   0             104m
+kube-system          kindnet-nm6t4                                            1/1     Running   0             104m
+kube-system          kube-apiserver-kong-fc-control-plane                     1/1     Running   0             104m
+kube-system          kube-controller-manager-kong-fc-control-plane            1/1     Running   0             104m
+kube-system          kube-proxy-cntrk                                         1/1     Running   0             104m
+kube-system          kube-scheduler-kong-fc-control-plane                     1/1     Running   0             104m
+local-path-storage   local-path-provisioner-9cd9bd544-w8vg6                   1/1     Running   0             104m
+monitoring           alertmanager-prometheus-stack-kube-prom-alertmanager-0   2/2     Running   0             26m
+monitoring           prometheus-prometheus-stack-kube-prom-prometheus-0       2/2     Running   0             26m
+monitoring           prometheus-stack-grafana-7d8f4b6d67-n2xjm                3/3     Running   0             26m
+monitoring           prometheus-stack-kube-prom-operator-5c9cf54d68-qjd2q     1/1     Running   0             26m
+monitoring           prometheus-stack-kube-state-metrics-7fb88f5df-qggbm      1/1     Running   0             26m
+monitoring           prometheus-stack-prometheus-node-exporter-fg5h4          1/1     Running   0             26m
+
+```
 
 ```
 k describe pods kong-1654889531-kong-549d959645-prz8s -n kong
