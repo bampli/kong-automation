@@ -28,9 +28,15 @@ helm version
 rm helm-v3.4.1-linux-amd64.tar.gz
 rm -rf linux-amd64
 
-# Helm Chart
+# Helm Charts
 helm repo add kong https://charts.konghq.com
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+helm repo add bitnami https://charts.bitnami.com/bitnami
+
 ```
+https://github.com/Kong/charts
+https://github.com/prometheus-community/helm-charts
+
 
 ### Create Cluster
 ```
@@ -43,6 +49,22 @@ cd infra/kong-k8s/kind
 ```
 cd infra/kong-k8s/kong
 ./kong.sh
+
+```
+
+### Prometheus & Keycloak
+
+https://github.com/prometheus-operator/kube-prometheus
+
+```
+./infra/misc/prometheus/prometheus.sh
+
+./infra/misc/keycloak/keycloak.sh
+
+export SERVICE_PORT=$(kubectl get --namespace iam -o jsonpath="{.spec.ports[0].port}" services keycloak)
+export SERVICE_IP=$(kubectl get svc --namespace iam keycloak -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+echo "http://${SERVICE_IP}:${SERVICE_PORT}/"
+
 
 ```
 
