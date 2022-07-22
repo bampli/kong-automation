@@ -45,6 +45,7 @@ kubectl apply -f kratelimit.yaml -n bets
 kubectl apply -f kprometheus.yaml
 kubectl apply -f bets-api.yaml -n bets
 kubectl apply -f king.yaml -n bets
+kubectl apply -f kopenid.yaml -n bets
 
 # Port forward to Keycloak UI
 #kubectl port-forward svc/keycloak 8080:80 -n iam

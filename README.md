@@ -99,5 +99,48 @@ kubectl get pods --all-namespaces
 k describe pods kong-kong-778665bf9b-lm2dg -n kong
 
 k logs kong-kong-778665bf9b-lm2dg proxy -f -n kong
+```
+
+### Token OpenID JWT
+
+```
+{
+  "alg": "RS256",
+  "typ": "JWT",
+  "kid": "ibBMfHpxHP9TdoihFLDjLjljtON0CXlfXYDbSv74uvc"
+}
+
+{
+  "exp": 1658527818,
+  "iat": 1658527518,
+  "jti": "a0563fa3-5c40-448f-a5bf-97fefb252ec5",
+  "iss": "http://keycloak.iam/realms/bets",
+  "aud": "account",
+  "sub": "f7f2766e-1d15-4c78-940d-b7601fa399f2",
+  "typ": "Bearer",
+  "azp": "kong",
+  "session_state": "de12335b-0539-4b4b-aece-24c74565a3b6",
+  "acr": "1",
+  "realm_access": {
+    "roles": [
+      "offline_access",
+      "uma_authorization",
+      "default-roles-bets"
+    ]
+  },
+  "resource_access": {
+    "account": {
+      "roles": [
+        "manage-account",
+        "manage-account-links",
+        "view-profile"
+      ]
+    }
+  },
+  "scope": "openid profile email",
+  "sid": "de12335b-0539-4b4b-aece-24c74565a3b6",
+  "email_verified": false,
+  "preferred_username": "maria"
+}
 
 ```
