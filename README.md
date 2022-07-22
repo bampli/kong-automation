@@ -1,6 +1,6 @@
 # Kong & Kubernetes
 
-## Quick start
+## Installing Tools
 
 ### Kind 14.1
 ```
@@ -38,16 +38,25 @@ https://github.com/Kong/charts
 https://github.com/prometheus-community/helm-charts
 
 
-### Create Cluster
+## Setup
+
+Added a file to install everything at once, just run *./setup.sh* to recreate the cluster and the containers. Following is the corresponding command sequence.
+
 ```
-cd infra/kong-k8s/kong-k8s/kind
+./setup.sh
+
+```
+
+### Kind Cluster
+```
+cd infra/kong-k8s/kind
 ./kind.sh
 
 ```
 
 ### Kong
 ```
-cd infra/kong-k8s/kong-k8s/kong
+cd infra/kong-k8s/kong
 ./kong.sh
 
 ```
@@ -57,18 +66,20 @@ cd infra/kong-k8s/kong-k8s/kong
 https://github.com/prometheus-operator/kube-prometheus
 
 ```
-./infra/kong-k8s/misc/prometheus/prometheus.sh
+cd ./infra/kong-k8s/misc/prometheus/
+./prometheus.sh
 
-./infra/kong-k8s/misc/keycloak/keycloak.sh
+cd ./infra/kong-k8s/misc/keycloak/
+./keycloak.sh
 
 export SERVICE_PORT=$(kubectl get --namespace iam -o jsonpath="{.spec.ports[0].port}" services keycloak)
 export SERVICE_IP=$(kubectl get svc --namespace iam keycloak -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
-echo "http://${SERVICE_IP}:${SERVICE_PORT}/"
+echo "Keycloak running at http://${SERVICE_IP}:${SERVICE_PORT}/"
 
 
 ```
 
-### Apps
+### All apps
 
 ```
 cd infra/kong-k8s/misc/apps
