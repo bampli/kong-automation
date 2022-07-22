@@ -33,6 +33,8 @@ helm repo add kong https://charts.konghq.com
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo add bitnami https://charts.bitnami.com/bitnami
 
+helm repo update
+
 ```
 https://github.com/Kong/charts
 https://github.com/prometheus-community/helm-charts
