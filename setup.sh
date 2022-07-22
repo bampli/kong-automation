@@ -43,4 +43,6 @@ cd $current
 cd infra/kong-k8s/misc/apis/
 kubectl apply -f kratelimit.yaml -n bets
 kubectl apply -f kprometheus.yaml
+kubectl apply -f bets-api.yaml -n bets
+kubectl apply -f king.yaml -n bets
 
