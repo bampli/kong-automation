@@ -49,6 +49,13 @@ To install everything at once, just run *./setup.sh* to recreate the cluster and
 
 ```
 
+After creation, a bets realm can be imported:
+
+```
+./infra/kong-k8s/misc/keycloak/realm.json
+
+```
+
 ### Kind Cluster
 ```
 cd infra/kong-k8s/kind

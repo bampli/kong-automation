@@ -38,4 +38,6 @@ Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJPaUVMZG
 }
 
 ###
-secret: oucjxKc6wHqJvp09kboRwUADSbG0mphc
+secrets:
+oucjxKc6wHqJvp09kboRwUADSbG0mphc
+bbVBg6vWL5b1h71FDAt78ewoyJ0IFxfM
