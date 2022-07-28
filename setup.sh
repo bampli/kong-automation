@@ -1,7 +1,7 @@
 #!/bin/bash
 current="$PWD"
 
-kind delete clusters  kong-fc
+kind delete clusters kong-fc
 
 # Kind cluster
 cd $current
