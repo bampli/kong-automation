@@ -56,6 +56,17 @@ After creation, a bets realm can be imported:
 
 ```
 
+Then, create users (login:passw) maria:maria joao:joao.
+
+Now, run pod with curl at namespace default:
+
+cd infra/kong-k8s/misc/token
+./apply-token.sh
+
+and get bearer token:
+./get-token.sh
+
+
 ### Kind Cluster
 ```
 cd infra/kong-k8s/kind
